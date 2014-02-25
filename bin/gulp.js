@@ -7,6 +7,7 @@ var semver = require('semver');
 var archy = require('archy');
 var Liftoff = require('liftoff');
 var taskTree = require('../lib/taskTree');
+var createChain = require('../lib/createChain');
 
 var cli = new Liftoff({
   name: 'gulp',
@@ -59,11 +60,20 @@ function handleArguments(args) {
     gutil.log(gutil.colors.red('Local gulp (installed in gulpfile dir) is', args.modulePackage.version));
   }
 
-  var gulpFile = require(args.configPath);
-  gutil.log('Using gulpfile', gutil.colors.magenta(args.configPath));
-
   var gulpInst = require(args.modulePath);
   logEvents(gulpInst);
+
+  global.task = gulpInst.task.bind(gulpInst);
+  global.src = function () {
+    return createChain({
+      gulp: gulpInst,
+      args: arguments,
+      configBase: args.configBase
+    });
+  };
+
+  var gulpFile = require(args.configPath);
+  gutil.log('Using gulpfile', gutil.colors.magenta(args.configPath));
   
   if (process.cwd() !== args.cwd) {
     process.chdir(args.cwd);

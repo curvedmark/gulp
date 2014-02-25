@@ -30,7 +30,9 @@
     "semver": "^2.2.1",
     "archy": "^0.0.2",
     "deprecated": "^0.0.1",
-    "liftoff": "^0.8.3"
+    "liftoff": "^0.8.3",
+    "gulp-changed": "^0.2.1",
+    "findup-sync": "^0.1.2"
   },
   "devDependencies": {
     "mocha": "^1.17.0",
@@ -46,7 +48,7 @@
     "mkdirp": "^0.3.5"
   },
   "scripts": {
-    "test": "node gulpfile.js && mocha --reporter spec",
+    "test": "node bin/gulp.js && mocha --reporter spec",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "engineStrict": true,

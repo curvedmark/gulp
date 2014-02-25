@@ -48,4 +48,5 @@ deprecated.field('gulp.env has been deprecated. Use gulp-util.env or your own CL
 Gulp.prototype.run = deprecated.method('gulp.run() has been deprecated. Use task dependencies or gulp.watch task triggering instead.', console.log, Gulp.prototype.run);
 
 var inst = new Gulp();
+inst.module = module;
 module.exports = inst;

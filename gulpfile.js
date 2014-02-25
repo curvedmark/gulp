@@ -4,19 +4,18 @@ var gulp = require('./');
 var log = require('gulp-util').log;
 
 var jshint = require('gulp-jshint');
-
 var codeFiles = ['**/*.js', '!node_modules/**'];
 
-gulp.task('lint', function(){
+task('lint', function(){
   log('Linting Files');
-  return gulp.src(codeFiles)
-    .pipe(jshint('.jshintrc'))
+  return src(codeFiles)
+    .jshint('.jshintrc')
     .pipe(jshint.reporter());
 });
 
-gulp.task('watch', function(){
+task('watch', function(){
   log('Watching Files');
   gulp.watch(codeFiles, ['lint']);
 });
 
-gulp.task('default', ['lint', 'watch']);
+task('default', ['lint', 'watch']);
